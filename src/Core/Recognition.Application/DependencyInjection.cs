@@ -19,7 +19,9 @@ namespace Recognition.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            //services.AddMediatR(Assembly.GetExecutingAssembly());
+
+
 
             services.AddTransient<IInvoiceOCRJob, InvoiceOCRJob>();
             services.AddHangfire(options =>
