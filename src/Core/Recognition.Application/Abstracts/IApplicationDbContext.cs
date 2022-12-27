@@ -14,6 +14,7 @@ namespace Recognition.Application.Abstracts
     {
         DbSet<Invoice> Invoices { get; set; }
         DbSet<InvoiceRawData> InvoiceRawDatas { get; set; }
-        
+        Task<int> SaveChangesAsync();
+
     }
 }

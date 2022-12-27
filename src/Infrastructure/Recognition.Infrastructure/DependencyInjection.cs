@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Protocols;
 using Recognition.Application.Abstracts;
 using Recognition.Application.Abstracts.Services;
 using Recognition.Infrastructure.Services;
@@ -17,13 +18,11 @@ namespace Recognition.Infrastructure
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
-        {
-
-
+        {   
             if (configuration.GetValue<bool>("UseInMemoryDatabase"))
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("CleanArchitecture.RazorDb")
+                    options.UseInMemoryDatabase("RecognitionDB")
                     ); ;
             }
             else
@@ -36,9 +35,10 @@ namespace Recognition.Infrastructure
                     );
             }
 
-            services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider.GetService<ApplicationDbContext>());
+            services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider!.GetService<ApplicationDbContext>());
             // services.AddScoped<IDomainEventService, DomainEventService>();
-
+            services.AddTransient<IUploadService, UploadService>();
+            services.AddScoped<IDomainEventService, DomainEventService>();
             return services;
         }
     }

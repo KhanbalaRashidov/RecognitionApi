@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Recognition.Application.Features.Commands.Invoices
+namespace Recognition.Application.Features.Commands.Invoices.Upload
 {
     public class UploadInvoicesCommand : IRequest<Result>
     {
