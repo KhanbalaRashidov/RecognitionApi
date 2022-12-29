@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileProviders;
 using Hangfire;
 using MediatR;
+using System.Reflection;
+using Recognition.Presistance.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddInfrastructureServices(builder.Configuration)
-    .AddApplicationServices();
-builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddInfrastructureServices(builder.Configuration);
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -41,7 +42,7 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseRouting();
 
 app.UseAuthorization();
-app.UseHangfireDashboard("/hangfire/index");
+//app.UseHangfireDashboard("/hangfire/index");
 
 app.MapControllers();
 app.Run();

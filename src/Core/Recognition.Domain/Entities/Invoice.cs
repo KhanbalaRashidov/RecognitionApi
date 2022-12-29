@@ -9,7 +9,7 @@ namespace Recognition.Domain.Entities
 {
     public class Invoice:AuditableEntity,IHasDomainEvent
     {
-        public string Status { get; set; }
+        public string? Status { get; set; }
         public string InvoiceNo { get; set; }
         public string Title { get; set; }
         public decimal? Amount { get; set; }

@@ -9,8 +9,8 @@ namespace Recognition.Web.API.Controllers
     [ApiController]
     public class InvoicesController : ControllerBase
     {
-        private readonly ISender _mediator;
-        public InvoicesController(ISender mediator)
+        private readonly IMediator _mediator;
+        public InvoicesController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -27,7 +27,7 @@ namespace Recognition.Web.API.Controllers
                 Data = stream.ToArray()
             };
             var result= await _mediator.Send(command);
-            return new JsonResult(result);
+            return Ok(result.Succeeded);
         }
 
     }

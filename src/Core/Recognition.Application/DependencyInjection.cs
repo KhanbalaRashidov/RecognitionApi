@@ -1,8 +1,10 @@
-﻿using Hangfire;
+﻿using FluentValidation;
+using Hangfire;
 using Hangfire.MemoryStorage;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
+using Recognition.Application.Features.EventHandlers.Invoices;
 using Recognition.Application.Features.PaddleOCR;
 using System;
 using System.Collections.Generic;
@@ -12,14 +14,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Recognition.Application
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddMediatR(typeof(DependencyInjection).Assembly);
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            //services.AddMediatR(Assembly.GetExecutingAssembly());
+          
 
 
 

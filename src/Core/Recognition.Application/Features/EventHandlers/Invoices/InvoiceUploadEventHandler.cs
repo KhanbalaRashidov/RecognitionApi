@@ -37,8 +37,7 @@ namespace Recognition.Application.Features.EventHandlers.Invoices
             item.Status = "Queuing";
             await _context.SaveChangesAsync();
             BackgroundJob.Enqueue(() => _ocr.Recognition(domainEvent.Item.Id));
-
-
+            
         }
     }
 }

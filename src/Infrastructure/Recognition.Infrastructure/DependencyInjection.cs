@@ -13,12 +13,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Recognition.Infrastructure
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
-        {   
+        {
             if (configuration.GetValue<bool>("UseInMemoryDatabase"))
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
@@ -35,10 +35,11 @@ namespace Recognition.Infrastructure
                     );
             }
 
-            services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider!.GetService<ApplicationDbContext>());
-            // services.AddScoped<IDomainEventService, DomainEventService>();
-            services.AddTransient<IUploadService, UploadService>();
-            services.AddScoped<IDomainEventService, DomainEventService>();
+            // services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider!.GetService<ApplicationDbContext>()!);
+            services.AddTransient<IDomainEventService, DomainEventService>();
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            services.AddScoped<IUploadService, UploadService>();
+
             return services;
         }
     }

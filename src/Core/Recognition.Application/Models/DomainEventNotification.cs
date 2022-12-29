@@ -17,7 +17,4 @@ namespace Recognition.Application.Models
 
         public TDomainEvent DomainEvent { get; }
     }
-    internal class DomainEventNotification
-    {
-    }
 }
